@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CategoryCard extends StatelessWidget {
   final String imgUrl, categoryName;
   final int sum;
-  CategoryCard({
+  const CategoryCard({
     Key? key,
     required this.categoryName,
     required this.sum,

@@ -1,5 +1,7 @@
+import 'package:find_freelancer/models/freelancer_model.dart';
 import 'package:find_freelancer/shared/theme.dart';
 import 'package:find_freelancer/widgets/category_card.dart';
+import 'package:find_freelancer/widgets/freelancer_item.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -124,9 +126,10 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: defaultMargin,
-                    vertical: 24,
+                  padding: const EdgeInsets.only(
+                    left: defaultMargin,
+                    right: defaultMargin,
+                    top: 24,
                   ),
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -152,7 +155,7 @@ class HomePage extends StatelessWidget {
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: [
+                            children: const [
                               CategoryCard(
                                 categoryName: 'Programmer',
                                 sum: 256,
@@ -186,7 +189,7 @@ class HomePage extends StatelessWidget {
                             ),
                             Text(
                               'Lihat Semua',
-                              style: pinkTextStyle.copyWith(
+                              style: redTextStyle.copyWith(
                                 fontWeight: semiBold,
                                 fontSize: 12,
                               ),
@@ -196,520 +199,37 @@ class HomePage extends StatelessWidget {
                         const SizedBox(
                           height: 24,
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    'assets/profile.png',
-                                    width: 80,
-                                  ),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Sona Ermando',
-                                        style: blackTextStyle.copyWith(
-                                          fontWeight: semiBold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 4,
-                                      ),
-                                      Text(
-                                        'Programmer',
-                                        style: blackTextStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: regular,
-                                          color: kBlackColor.withOpacity(0.5),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 9,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                'assets/star.png',
-                                                width: 10,
-                                              ),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                '4,9',
-                                                style: blackTextStyle.copyWith(
-                                                  fontSize: 10,
-                                                  fontWeight: medium,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            width: 16,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                'assets/map-pin.png',
-                                                width: 10,
-                                              ),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                'Bandung',
-                                                style: blackTextStyle.copyWith(
-                                                  fontSize: 10,
-                                                  fontWeight: medium,
-                                                  color: kBlackColor
-                                                      .withOpacity(0.5),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            width: 16,
-                                          ),
-                                          RichText(
-                                            textAlign: TextAlign.right,
-                                            text: TextSpan(
-                                              text: '\$55/',
-                                              style: blackTextStyle.copyWith(
-                                                fontSize: 12,
-                                                fontWeight: bold,
-                                              ),
-                                              children: [
-                                                TextSpan(
-                                                  text: 'hr',
-                                                  style:
-                                                      blackTextStyle.copyWith(
-                                                    color: kBlackColor
-                                                        .withOpacity(0.6),
-                                                    fontSize: 12,
-                                                    fontWeight: medium,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 90,
-                                            height: 28,
-                                            decoration: BoxDecoration(
-                                              color: kPrimaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'HIRE ME',
-                                                style: whiteTextStyle.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          Container(
-                                            width: 90,
-                                            height: 28,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: kPrimaryColor,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'PROFILE',
-                                                style: redTextStyle.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Container(
-                                width: double.infinity,
-                                height: 1,
-                                color: kBlackColor.withOpacity(0.2),
-                              ),
-                            ],
+                        FreelancerItem(
+                          freelancerModel: FreelancerModel(
+                            id: '1',
+                            name: 'Sona Ermando',
+                            role: 'Programmer',
+                            imgProfile: 'assets/profile.png',
+                            rating: 4.9,
+                            city: 'Aceh',
+                            price: 50,
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    'assets/profile.png',
-                                    width: 80,
-                                  ),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Sona Ermando',
-                                        style: blackTextStyle.copyWith(
-                                          fontWeight: semiBold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 4,
-                                      ),
-                                      Text(
-                                        'Programmer',
-                                        style: blackTextStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: regular,
-                                          color: kBlackColor.withOpacity(0.5),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 9,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                'assets/star.png',
-                                                width: 10,
-                                              ),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                '4,9',
-                                                style: blackTextStyle.copyWith(
-                                                  fontSize: 10,
-                                                  fontWeight: medium,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            width: 16,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                'assets/map-pin.png',
-                                                width: 10,
-                                              ),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                'Bandung',
-                                                style: blackTextStyle.copyWith(
-                                                  fontSize: 10,
-                                                  fontWeight: medium,
-                                                  color: kBlackColor
-                                                      .withOpacity(0.5),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            width: 16,
-                                          ),
-                                          RichText(
-                                            textAlign: TextAlign.right,
-                                            text: TextSpan(
-                                              text: '\$55/',
-                                              style: blackTextStyle.copyWith(
-                                                fontSize: 12,
-                                                fontWeight: bold,
-                                              ),
-                                              children: [
-                                                TextSpan(
-                                                  text: 'hr',
-                                                  style:
-                                                      blackTextStyle.copyWith(
-                                                    color: kBlackColor
-                                                        .withOpacity(0.6),
-                                                    fontSize: 12,
-                                                    fontWeight: medium,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 90,
-                                            height: 28,
-                                            decoration: BoxDecoration(
-                                              color: kPrimaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'HIRE ME',
-                                                style: whiteTextStyle.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          Container(
-                                            width: 90,
-                                            height: 28,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: kPrimaryColor,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'PROFILE',
-                                                style: redTextStyle.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Container(
-                                width: double.infinity,
-                                height: 1,
-                                color: kBlackColor.withOpacity(0.2),
-                              ),
-                            ],
+                        FreelancerItem(
+                          freelancerModel: FreelancerModel(
+                            id: '2',
+                            name: 'Imelda Elvanni',
+                            role: 'Programmer',
+                            imgProfile: 'assets/profile.png',
+                            rating: 5.0,
+                            city: 'Gerenggam City',
+                            price: 40,
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    'assets/profile.png',
-                                    width: 80,
-                                  ),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Sona Ermando',
-                                        style: blackTextStyle.copyWith(
-                                          fontWeight: semiBold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 4,
-                                      ),
-                                      Text(
-                                        'Programmer',
-                                        style: blackTextStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: regular,
-                                          color: kBlackColor.withOpacity(0.5),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 9,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                'assets/star.png',
-                                                width: 10,
-                                              ),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                '4,9',
-                                                style: blackTextStyle.copyWith(
-                                                  fontSize: 10,
-                                                  fontWeight: medium,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            width: 16,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                'assets/map-pin.png',
-                                                width: 10,
-                                              ),
-                                              const SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                'Bandung',
-                                                style: blackTextStyle.copyWith(
-                                                  fontSize: 10,
-                                                  fontWeight: medium,
-                                                  color: kBlackColor
-                                                      .withOpacity(0.5),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            width: 16,
-                                          ),
-                                          RichText(
-                                            textAlign: TextAlign.right,
-                                            text: TextSpan(
-                                              text: '\$55/',
-                                              style: blackTextStyle.copyWith(
-                                                fontSize: 12,
-                                                fontWeight: bold,
-                                              ),
-                                              children: [
-                                                TextSpan(
-                                                  text: 'hr',
-                                                  style:
-                                                      blackTextStyle.copyWith(
-                                                    color: kBlackColor
-                                                        .withOpacity(0.6),
-                                                    fontSize: 12,
-                                                    fontWeight: medium,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 90,
-                                            height: 28,
-                                            decoration: BoxDecoration(
-                                              color: kPrimaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'HIRE ME',
-                                                style: whiteTextStyle.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          Container(
-                                            width: 90,
-                                            height: 28,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: kPrimaryColor,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'PROFILE',
-                                                style: redTextStyle.copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Container(
-                                width: double.infinity,
-                                height: 1,
-                                color: kBlackColor.withOpacity(0.2),
-                              ),
-                            ],
+                        FreelancerItem(
+                          freelancerModel: FreelancerModel(
+                            id: '3',
+                            name: 'Wahyu Nur Fadhilla',
+                            role: 'Programmer',
+                            imgProfile: 'assets/profile.png',
+                            rating: 4.8,
+                            city: 'Medan',
+                            price: 55,
                           ),
                         ),
                       ],
