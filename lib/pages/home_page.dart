@@ -1,4 +1,5 @@
 import 'package:find_freelancer/shared/theme.dart';
+import 'package:find_freelancer/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -152,123 +153,20 @@ class HomePage extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 145,
-                                    height: 106,
-                                    decoration: BoxDecoration(
-                                      color: kPinkCardColor,
-                                      borderRadius: BorderRadius.circular(18),
-                                    ),
-                                    child: Center(
-                                      child:
-                                          Image.asset('assets/programmer.png'),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  Text(
-                                    'Programmer',
-                                    style: blackTextStyle.copyWith(
-                                      fontSize: 16,
-                                      fontWeight: bold,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    '256 Programmer',
-                                    style: blackTextStyle.copyWith(
-                                      color: kBlackColor.withOpacity(0.5),
-                                      fontSize: 11,
-                                      fontWeight: semiBold,
-                                    ),
-                                  ),
-                                ],
+                              CategoryCard(
+                                categoryName: 'Programmer',
+                                sum: 256,
+                                imgUrl: 'assets/programmer.png',
                               ),
-                              const SizedBox(
-                                width: 16,
+                              CategoryCard(
+                                categoryName: 'Designer',
+                                sum: 152,
+                                imgUrl: 'assets/designer.png',
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 145,
-                                    height: 106,
-                                    decoration: BoxDecoration(
-                                      color: kPinkCardColor,
-                                      borderRadius: BorderRadius.circular(18),
-                                    ),
-                                    child: Center(
-                                      child: Image.asset('assets/designer.png'),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  Text(
-                                    'UI/UX Designer',
-                                    style: blackTextStyle.copyWith(
-                                      fontSize: 16,
-                                      fontWeight: bold,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    '120 Designer',
-                                    style: blackTextStyle.copyWith(
-                                      color: kBlackColor.withOpacity(0.5),
-                                      fontSize: 11,
-                                      fontWeight: semiBold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 145,
-                                    height: 106,
-                                    decoration: BoxDecoration(
-                                      color: kPinkCardColor,
-                                      borderRadius: BorderRadius.circular(18),
-                                    ),
-                                    child: Center(
-                                      child: Image.asset('assets/social.png'),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  Text(
-                                    'Sosmed Admin',
-                                    style: blackTextStyle.copyWith(
-                                      fontSize: 16,
-                                      fontWeight: bold,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    '67 Admin',
-                                    style: blackTextStyle.copyWith(
-                                      color: kBlackColor.withOpacity(0.5),
-                                      fontSize: 11,
-                                      fontWeight: semiBold,
-                                    ),
-                                  ),
-                                ],
+                              CategoryCard(
+                                categoryName: 'Admin',
+                                sum: 67,
+                                imgUrl: 'assets/social.png',
                               ),
                             ],
                           ),
