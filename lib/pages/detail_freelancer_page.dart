@@ -1,8 +1,33 @@
+import 'package:find_freelancer/models/client_model.dart';
+import 'package:find_freelancer/models/freelancer_model.dart';
+import 'package:find_freelancer/models/review_model.dart';
+import 'package:find_freelancer/pages/photo_view.dart';
 import 'package:find_freelancer/shared/theme.dart';
+import 'package:find_freelancer/widgets/client_item.dart';
+import 'package:find_freelancer/widgets/review_item.dart';
 import 'package:flutter/material.dart';
 
-class DetailFreelancerPage extends StatelessWidget {
-  const DetailFreelancerPage({Key? key}) : super(key: key);
+class DetailFreelancerPage extends StatefulWidget {
+  final FreelancerModel freelancer;
+  const DetailFreelancerPage({required this.freelancer, Key? key})
+      : super(key: key);
+
+  @override
+  State<DetailFreelancerPage> createState() => _DetailFreelancerPageState();
+}
+
+class _DetailFreelancerPageState extends State<DetailFreelancerPage>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: 3,
+      vsync: this,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,70 +79,72 @@ class DetailFreelancerPage extends StatelessWidget {
                     const SizedBox(
                       width: 32,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Sona Ermando',
-                          style: redTextStyle.copyWith(
-                            fontSize: 24,
-                            fontWeight: semiBold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Programmer',
-                          style: redTextStyle.copyWith(
-                            color: kPrimaryColor.withOpacity(0.7),
-                            fontSize: 14,
-                            fontWeight: regular,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/map-pin.png',
-                              width: 16,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.freelancer.name,
+                            style: redTextStyle.copyWith(
+                              fontSize: 24,
+                              fontWeight: semiBold,
                             ),
-                            const SizedBox(
-                              width: 4,
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            widget.freelancer.role,
+                            style: redTextStyle.copyWith(
+                              color: kPrimaryColor.withOpacity(0.7),
+                              fontSize: 14,
+                              fontWeight: regular,
                             ),
-                            Text(
-                              'Aceh',
-                              style: blackTextStyle.copyWith(
-                                fontSize: 12,
-                                fontWeight: medium,
-                                color: kBlackColor.withOpacity(0.5),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/map-pin.png',
+                                width: 16,
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                widget.freelancer.city,
+                                style: blackTextStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: medium,
+                                  color: kBlackColor.withOpacity(0.5),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 21,
+                          ),
+                          Container(
+                            width: 90,
+                            height: 28,
+                            decoration: BoxDecoration(
+                              color: kPrimaryColor,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'HIRE ME',
+                                style: whiteTextStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: bold,
+                                ),
                               ),
                             ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 21,
-                        ),
-                        Container(
-                          width: 90,
-                          height: 28,
-                          decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Center(
-                            child: Text(
-                              'HIRE ME',
-                              style: whiteTextStyle.copyWith(
-                                fontSize: 12,
-                                fontWeight: bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -177,7 +204,7 @@ class DetailFreelancerPage extends StatelessWidget {
                           height: 12,
                         ),
                         Text(
-                          'UX Design, UI Design, IoT Design, Micro-interaction Design, 3D Illustration',
+                          'Mobile App Development, IOS App Development, Cross-Platform app, Web Development',
                           textAlign: TextAlign.left,
                           style: blackTextStyle.copyWith(
                             color: kBlackColor.withOpacity(0.5),
@@ -191,104 +218,158 @@ class DetailFreelancerPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: kPinkCardColor,
-                                  width: 2,
-                                ),
-                                color: kPinkCardColor,
-                                borderRadius: BorderRadius.circular(
-                                  16,
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Portofolio',
-                                  style: redTextStyle.copyWith(
-                                    fontSize: 16,
-                                    fontWeight: semiBold,
-                                  ),
-                                ),
-                              ),
+                            _buildButtonTab(
+                              index: 0,
+                              label: 'Portofolio',
                             ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: kPinkCardColor,
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  16,
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Clients',
-                                  style: redTextStyle.copyWith(
-                                    fontSize: 16,
-                                    fontWeight: semiBold,
-                                    color: kPrimaryColor.withOpacity(0.6),
-                                  ),
-                                ),
-                              ),
+                            _buildButtonTab(
+                              index: 1,
+                              label: 'Clients',
                             ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: kPinkCardColor,
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  16,
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Reviews',
-                                  style: redTextStyle.copyWith(
-                                    fontSize: 16,
-                                    fontWeight: semiBold,
-                                    color: kPrimaryColor.withOpacity(0.6),
-                                  ),
-                                ),
-                              ),
+                            _buildButtonTab(
+                              index: 2,
+                              label: 'Reviews',
                             ),
                           ],
                         ),
                         const SizedBox(
                           height: 32,
                         ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(24),
-                          child: Image.asset(
-                            'assets/portofolio.png',
-                            width: double.infinity,
+                        Tab(
+                          height: 200,
+                          child: TabBarView(
+                            controller: _tabController,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const PhotoViewPage(
+                                        'assets/portofolio.png',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(24),
+                                  child: Image.asset(
+                                    'assets/portofolio.png',
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    ClientItem(
+                                      clientModel: ClientModel(
+                                        clientName: 'Crowde',
+                                        about:
+                                            'Fintech & agriculture technology company',
+                                        city: 'Jakarta Selatan',
+                                        hire: 20,
+                                        imgUrl: 'assets/profile.png',
+                                      ),
+                                    ),
+                                    ClientItem(
+                                      clientModel: ClientModel(
+                                        clientName: 'Koinworks',
+                                        about: 'Fintech Company',
+                                        city: 'Jakarta Selatan',
+                                        hire: 40,
+                                        imgUrl: 'assets/profile.png',
+                                      ),
+                                    ),
+                                    ClientItem(
+                                      clientModel: ClientModel(
+                                        clientName: 'Majoo',
+                                        about:
+                                            'Fintech & agriculture technology company',
+                                        city: 'Jakarta Selatan',
+                                        hire: 20,
+                                        imgUrl: 'assets/profile.png',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              ListView(
+                                children: [
+                                  ReviewItem(
+                                    reviewModel: ReviewModel(
+                                      clientName: 'Crowde',
+                                      comment: 'Proffesional !',
+                                      rating: 5,
+                                      imgUrl: 'assets/profile.png',
+                                    ),
+                                  ),
+                                  ReviewItem(
+                                    reviewModel: ReviewModel(
+                                      clientName: 'Koinworks',
+                                      comment:
+                                          'Great Programmer! fast and clean code!',
+                                      rating: 5,
+                                      imgUrl: 'assets/profile.png',
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
                         ),
                       ],
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  InkWell _buildButtonTab({
+    required int index,
+    required String label,
+  }) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _tabController.animateTo(index);
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 8,
+        ),
+        decoration: BoxDecoration(
+          color: _tabController.index == index ? kPinkCardColor : null,
+          border: Border.all(
+            color: kPinkCardColor,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(
+            16,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            label,
+            style: redTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+              color: _tabController.index == index
+                  ? kPrimaryColor
+                  : kPrimaryColor.withOpacity(0.6),
+            ),
+          ),
+        ),
       ),
     );
   }
