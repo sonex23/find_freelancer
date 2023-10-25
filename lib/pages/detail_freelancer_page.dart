@@ -1,3 +1,4 @@
+import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:find_freelancer/models/client_model.dart';
 import 'package:find_freelancer/models/freelancer_model.dart';
 import 'package:find_freelancer/models/review_model.dart';
@@ -9,24 +10,21 @@ import 'package:flutter/material.dart';
 
 class DetailFreelancerPage extends StatefulWidget {
   final FreelancerModel freelancer;
-  const DetailFreelancerPage({required this.freelancer, Key? key})
-      : super(key: key);
+  const DetailFreelancerPage({required this.freelancer, Key? key}) : super(key: key);
 
   @override
   State<DetailFreelancerPage> createState() => _DetailFreelancerPageState();
 }
 
-class _DetailFreelancerPageState extends State<DetailFreelancerPage>
-    with TickerProviderStateMixin {
-  late TabController _tabController;
+class _DetailFreelancerPageState extends State<DetailFreelancerPage> with TickerProviderStateMixin {
+  late PageController _pageViewController;
+  late int _page;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(
-      length: 3,
-      vsync: this,
-    );
+    _pageViewController = PageController(initialPage: 0);
+    _page = 0;
   }
 
   @override
@@ -235,90 +233,86 @@ class _DetailFreelancerPageState extends State<DetailFreelancerPage>
                         const SizedBox(
                           height: 32,
                         ),
-                        Tab(
-                          height: 200,
-                          child: TabBarView(
-                            controller: _tabController,
-                            physics: const NeverScrollableScrollPhysics(),
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const PhotoViewPage(
-                                        'assets/portofolio.png',
-                                      ),
+                        ExpandablePageView(
+                          controller: _pageViewController,
+                          onPageChanged: (page) {
+                            setState(() {
+                              _page = page;
+                            });
+                          },
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const PhotoViewPage(
+                                      'assets/portofolio.png',
                                     ),
-                                  );
-                                },
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(24),
-                                  child: Image.asset(
-                                    'assets/portofolio.png',
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
                                   ),
+                                );
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(24),
+                                child: Image.asset(
+                                  'assets/portofolio.png',
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    ClientItem(
-                                      clientModel: ClientModel(
-                                        clientName: 'Crowde',
-                                        about:
-                                            'Fintech & agriculture technology company',
-                                        city: 'Jakarta Selatan',
-                                        hire: 20,
-                                        imgUrl: 'assets/profile.png',
-                                      ),
-                                    ),
-                                    ClientItem(
-                                      clientModel: ClientModel(
-                                        clientName: 'Koinworks',
-                                        about: 'Fintech Company',
-                                        city: 'Jakarta Selatan',
-                                        hire: 40,
-                                        imgUrl: 'assets/profile.png',
-                                      ),
-                                    ),
-                                    ClientItem(
-                                      clientModel: ClientModel(
-                                        clientName: 'Majoo',
-                                        about:
-                                            'Fintech & agriculture technology company',
-                                        city: 'Jakarta Selatan',
-                                        hire: 20,
-                                        imgUrl: 'assets/profile.png',
-                                      ),
-                                    ),
-                                  ],
+                            ),
+                            Column(
+                              children: [
+                                ClientItem(
+                                  clientModel: ClientModel(
+                                    clientName: 'Crowde',
+                                    about: 'Fintech & agriculture technology company',
+                                    city: 'Jakarta Selatan',
+                                    hire: 20,
+                                    imgUrl: 'assets/profile.png',
+                                  ),
                                 ),
-                              ),
-                              ListView(
-                                children: [
-                                  ReviewItem(
-                                    reviewModel: ReviewModel(
-                                      clientName: 'Crowde',
-                                      comment: 'Proffesional !',
-                                      rating: 5,
-                                      imgUrl: 'assets/profile.png',
-                                    ),
+                                ClientItem(
+                                  clientModel: ClientModel(
+                                    clientName: 'Koinworks',
+                                    about: 'Fintech Company',
+                                    city: 'Jakarta Selatan',
+                                    hire: 40,
+                                    imgUrl: 'assets/profile.png',
                                   ),
-                                  ReviewItem(
-                                    reviewModel: ReviewModel(
-                                      clientName: 'Koinworks',
-                                      comment:
-                                          'Great Programmer! fast and clean code!',
-                                      rating: 5,
-                                      imgUrl: 'assets/profile.png',
-                                    ),
+                                ),
+                                ClientItem(
+                                  clientModel: ClientModel(
+                                    clientName: 'Majoo',
+                                    about: 'Fintech & agriculture technology company',
+                                    city: 'Jakarta Selatan',
+                                    hire: 20,
+                                    imgUrl: 'assets/profile.png',
                                   ),
-                                ],
-                              )
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                ReviewItem(
+                                  reviewModel: ReviewModel(
+                                    clientName: 'Crowde',
+                                    comment: 'Proffesional !',
+                                    rating: 5,
+                                    imgUrl: 'assets/profile.png',
+                                  ),
+                                ),
+                                ReviewItem(
+                                  reviewModel: ReviewModel(
+                                    clientName: 'Koinworks',
+                                    comment: 'Great Programmer! fast and clean code!',
+                                    rating: 5,
+                                    imgUrl: 'assets/profile.png',
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
                         ),
                       ],
                     ),
@@ -339,7 +333,8 @@ class _DetailFreelancerPageState extends State<DetailFreelancerPage>
     return InkWell(
       onTap: () {
         setState(() {
-          _tabController.animateTo(index);
+          _page = index;
+          _pageViewController.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.ease);
         });
       },
       child: AnimatedContainer(
@@ -349,7 +344,7 @@ class _DetailFreelancerPageState extends State<DetailFreelancerPage>
           vertical: 8,
         ),
         decoration: BoxDecoration(
-          color: _tabController.index == index ? kPinkCardColor : null,
+          color: _page == index ? kPinkCardColor : null,
           border: Border.all(
             color: kPinkCardColor,
             width: 2,
@@ -364,9 +359,7 @@ class _DetailFreelancerPageState extends State<DetailFreelancerPage>
             style: redTextStyle.copyWith(
               fontSize: 16,
               fontWeight: semiBold,
-              color: _tabController.index == index
-                  ? kPrimaryColor
-                  : kPrimaryColor.withOpacity(0.6),
+              color: _page == index ? kPrimaryColor : kPrimaryColor.withOpacity(0.6),
             ),
           ),
         ),
